@@ -1,2 +1,2 @@
-# espc23
+# ESPC23
 Demo scripts for ESPC23
