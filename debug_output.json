@@ -1,0 +1,481 @@
+DEBUG: ============================ HTTP REQUEST ============================
+
+HTTP Method:
+PUT
+
+Absolute Uri:
+https://management.azure.com/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourceGroups/test-azkeyvault-rg/providers/Microsoft.KeyVault/vaults/test-azkeyvault202010old?api-version=2022-07-01
+
+Headers:
+x-ms-client-request-id        : 07a7743b-d5ae-4721-8667-0413e948d595
+accept-language               : en-US
+
+Body:
+{
+  "location": "westeurope",
+  "properties": {
+    "tenantId": "YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY",
+    "sku": {
+      "name": "standard",
+      "family": "A"
+    },
+    "accessPolicies": [
+      {
+        "tenantId": "YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY",
+        "objectId": "92cc5647-fcfd-487f-8638-510ab1ba0a26",
+        "permissions": {
+          "keys": [
+            "all"
+          ],
+          "secrets": [
+            "all"
+          ],
+          "certificates": [
+            "all"
+          ],
+          "storage": [
+            "all"
+          ]
+        }
+      }
+    ],
+    "vaultUri": "",
+    "softDeleteRetentionInDays": 90,
+    "networkAcls": {
+      "bypass": "AzureServices",
+      "defaultAction": "Allow"
+    }
+  }
+}
+
+DEBUG: ============================ HTTP RESPONSE ============================
+
+Status Code:
+OK
+
+Headers:
+Pragma                        : no-cache
+x-ms-client-request-id        : 07a7743b-d5ae-4721-8667-0413e948d595
+x-ms-keyvault-service-version : 1.5.969.0
+x-ms-request-id               : bb19e4cb-7d9b-4af3-9639-0acccf873eaf
+X-Content-Type-Options        : nosniff
+Strict-Transport-Security     : max-age=31536000; includeSubDomains
+x-ms-ratelimit-remaining-subscription-writes: 1199
+x-ms-correlation-request-id   : daf08f4f-9445-4931-bc4d-9b1d732541a1
+x-ms-routing-request-id       : GERMANYWESTCENTRAL:20231103T112605Z:daf08f4f-9445-4931-bc4d-9b1d732541a1
+Cache-Control                 : no-cache
+Date                          : Fri, 03 Nov 2023 11:26:05 GMT
+Server                        : Microsoft-IIS/10.0
+X-AspNet-Version              : 4.0.30319
+
+Body:
+{
+  "id":
+"/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourceGroups/test-azkeyvault-rg/providers/Microsoft.Ke
+yVault/vaults/test-azkeyvault202010old",
+  "name": "test-azkeyvault202010old",
+  "type": "Microsoft.KeyVault/vaults",
+  "location": "westeurope",
+  "tags": {},
+  "systemData": {
+    "createdBy": "username@domainname.onmicrosoft.com",
+    "createdByType": "User",
+    "createdAt": "2023-11-03T11:26:03.183Z",
+    "lastModifiedBy": "username@domainname.onmicrosoft.com",
+    "lastModifiedByType": "User",
+    "lastModifiedAt": "2023-11-03T11:26:03.183Z"
+  },
+  "properties": {
+    "sku": {
+      "family": "A",
+      "name": "standard"
+    },
+    "tenantId": "YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY",
+    "accessPolicies": [
+      {
+        "tenantId": "YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY",
+        "objectId": "92cc5647-fcfd-487f-8638-510ab1ba0a26",
+        "permissions": {
+          "keys": [
+            "all"
+          ],
+          "secrets": [
+            "all"
+          ],
+          "certificates": [
+            "all"
+          ],
+          "storage": [
+            "all"
+          ]
+        }
+      }
+    ],
+    "enabledForDeployment": false,
+    "enableSoftDelete": true,
+    "softDeleteRetentionInDays": 90,
+    "vaultUri": "https://test-azkeyvault202010old.vault.azure.net",
+    "provisioningState": "RegisteringDns",
+    "publicNetworkAccess": "Enabled"
+  }
+}
+
+####################################################
+
+DEBUG: ============================ HTTP REQUEST ============================                                           
+
+HTTP Method:
+PUT
+
+Absolute Uri:
+https://management.azure.com/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourcegroups/test-azkeyvault-rg/providers/Microsoft.Resources/deployments/test-azkeyvault202010?api-version=2021-04-01
+
+Headers:
+Accept-Language               : en-US
+x-ms-client-request-id        : bcc2da50-0b3b-4ebb-81f7-b34429da9f4b
+
+Body:
+{
+  "properties": {
+    "template": {
+      "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+      "contentVersion": "1.0.0.0",
+      "parameters": {
+        "vaultName": {
+          "type": "string",
+          "defaultValue": "[concat('keyvault-', uniqueString(resourceGroup().id))]",
+          "metadata": {
+            "description": "Specifies the name of the KeyVault, this value must be globally unique."
+          }
+        },
+        "location": {
+          "type": "string",
+          "defaultValue": "[resourceGroup().location]",
+          "metadata": {
+            "description": "Specifies the Azure location where the key vault should be created."
+          }
+        },
+        "enabledForDeployment": {
+          "type": "bool",
+          "defaultValue": false,
+          "metadata": {
+            "description": "Specifies whether Azure Virtual Machines are permitted to retrieve certificates stored as secrets from the key vault."
+          }
+        },
+        "enabledForDiskEncryption": {
+          "type": "bool",
+          "defaultValue": false,
+          "metadata": {
+            "description": "Specifies whether Azure Disk Encryption is permitted to retrieve secrets from the vault and unwrap keys."
+          }
+        },
+        "enabledForTemplateDeployment": {
+          "type": "string",
+          "defaultValue": "NotSpecified",
+          "allowedValues": [
+            "NotSpecified",
+            "Enabled",
+            "Disabled"
+          ]
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "defaultValue": "",
+          "metadata": {
+            "description": "Property that controls permission for data plane traffic coming from public networks while private endpoint is enabled."       
+          }
+        },
+        "enablePurgeProtection": {
+          "type": "bool",
+          "defaultValue": false,
+          "metadata": {
+            "description": "Property specifying whether protection against purge is enabled for this vault.  This property does not accept false but enabled here to allow for this to be optional, if false, the property will not be set."
+          }
+        },
+        "enableRbacAuthorization": {
+          "type": "bool",
+          "defaultValue": false,
+          "metadata": {
+            "description": "Property that controls how data actions are authorized. When true, the key vault will use Role Based Access Control (RBAC) for authorization of data actions, and the access policies specified in vault properties will be ignored."
+          }
+        },
+        "enableSoftDelete": {
+          "type": "bool",
+          "defaultValue": true,
+          "metadata": {
+            "description": "Property to specify whether the 'soft delete' functionality is enabled for this key vault. If it's not set to any value(true or false) when creating new key vault, it will be set to true by default. Once set to true, it cannot be reverted to false."
+          }
+        },
+        "softDeleteRetentionInDays": {
+          "type": "int",
+          "defaultValue": 90,
+          "minValue": 7,
+          "maxValue": 90,
+          "metadata": {
+            "description": "softDelete data retention days, only used if enableSoftDelete is true. It accepts >=7 and <=90."
+          }
+        },
+        "tenantId": {
+          "type": "string",
+          "defaultValue": "[subscription().tenantId]",
+          "metadata": {
+            "description": "Specifies the Azure Active Directory tenant ID that should be used for authenticating requests to the key vault. Get it by using Get-AzSubscription cmdlet."
+          }
+        },
+        "networkRuleBypassOptions": {
+          "type": "string",
+          "defaultValue": "AzureServices",
+          "allowedValues": [
+            "None",
+            "AzureServices"
+          ],
+          "metadata": {
+            "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'. If not specified the default is 'AzureServices'."
+          }
+        },
+        "NetworkRuleAction": {
+          "type": "string",
+          "defaultValue": "Allow",
+          "allowedValues": [
+            "Allow",
+            "Deny"
+          ],
+          "metadata": {
+            "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated."
+          }
+        },
+        "ipRules": {
+          "type": "array",
+          "defaultValue": [],
+          "metadata": {
+            "description": "An array of IPv4 addresses or rangea in CIDR notation, e.g. '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78)."
+          }
+        },
+        "accessPolicies": {
+          "type": "array",
+          "defaultValue": [],
+          "metadata": {
+            "description": "An complex object array that contains the complete definition of the access policy."
+          }
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "defaultValue": [],
+          "metadata": {
+            "description": "An array for resourceIds for the virtualNetworks allowed to access the vault."
+          }
+        },
+        "skuName": {
+          "type": "string",
+          "defaultValue": "Standard",
+          "allowedValues": [
+            "Standard",
+            "Premium"
+          ],
+          "metadata": {
+            "description": "Specifies whether the key vault is a standard vault or a premium vault."
+          }
+        },
+        "tags": {
+          "type": "object",
+          "defaultValue": {},
+          "metadata": {
+            "description": "Tags to be assigned to the KeyVault."
+          }
+        }
+      },
+      "variables": {},
+      "resources": [
+        {
+          "name": "test-azkeyvault202010",
+          "type": "Microsoft.KeyVault/vaults",
+          "apiVersion": "2023-02-01",
+          "location": "westeurope",
+          "tags": "[parameters('tags')]",
+          "properties": {
+            "tenantId": "[parameters('tenantId')]",
+            "sku": {
+              "family": "A",
+              "name": "[parameters('skuName')]"
+            },
+            "copy": [
+              {
+                "name": "accessPolicies",
+                "count": "[length(parameters('accessPolicies'))]",
+                "input": {
+                  "tenantId": "[parameters('accessPolicies')[copyIndex('accessPolicies')].tenantId]",
+                  "objectId": "[parameters('accessPolicies')[copyIndex('accessPolicies')].objectId]",
+                  "permissions": "[parameters('accessPolicies')[copyIndex('accessPolicies')].permissions]"
+                }
+              }
+            ],
+            "publicNetworkAccess": "[parameters('publicNetworkAccess')]",
+            "enabledForDeployment": "[null()]",
+            "enabledForDiskEncryption": "[null()]",
+            "enabledForTemplateDeployment": "[if(equals(parameters('enabledForTemplateDeployment'), 'NotSpecified'), null(), if(equals(parameters('enabledForTemplateDeployment'), 'Enabled'), true(), false()))]",
+            "enableSoftDelete": "[parameters('enableSoftDelete')]",
+            "softDeleteRetentionInDays": 90,
+            "enableRbacAuthorization": "[null()]",
+            "enablePurgeProtection": "[null()]",
+            "networkAcls": {
+              "bypass": "[null()]",
+              "defaultAction": "[null()]",
+              "copy": [
+                {
+                  "name": "ipRules",
+                  "count": "[length(parameters('ipRules'))]",
+                  "input": {
+                    "value": "[parameters('ipRules')[copyIndex('ipRules')]]"
+                  }
+                },
+                {
+                  "name": "virtualNetworkRules",
+                  "count": "[length(parameters('virtualNetworkRules'))]",
+                  "input": {
+                    "id": "[parameters('virtualNetworkRules')[copyIndex('virtualNetworkRules')]]"
+                  }
+                }
+              ]
+            }
+          }
+        }
+      ],
+      "outputs": {
+        "vaultName": {
+          "type": "string",
+          "value": "[parameters('vaultName')]"
+        },
+        "vaultResourceGroup": {
+          "type": "string",
+          "value": "[resourceGroup().name]"
+        },
+        "location": {
+          "type": "string",
+          "value": "[parameters('location')]"
+        }
+      }
+    },
+    "mode": "Incremental"
+  }
+}
+
+
+DEBUG: ============================ HTTP RESPONSE ============================                                          
+
+Status Code:
+Created
+
+Headers:
+Cache-Control                 : no-cache
+Pragma                        : no-cache
+Azure-AsyncOperation          : https://management.azure.com/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourcegroups/test-azkeyvault-rg/providers/Microsoft.Resources/deployments/test-azkeyvault202010/operationStatuses/08585022589673719235?api-version=2021-04-01
+x-ms-ratelimit-remaining-subscription-writes: 1199
+x-ms-request-id               : 13ca74bb-cc6a-4dd3-900a-f01f1d8ff16f
+x-ms-correlation-request-id   : 13ca74bb-cc6a-4dd3-900a-f01f1d8ff16f
+x-ms-routing-request-id       : NORWAYEAST:20231107T090519Z:13ca74bb-cc6a-4dd3-900a-f01f1d8ff16f
+Strict-Transport-Security     : max-age=31536000; includeSubDomains
+X-Content-Type-Options        : nosniff
+Date                          : Tue, 07 Nov 2023 09:05:19 GMT
+
+Body:
+{
+  "id": "/subscriptions/XXXXXXXX-XXXX-XXXX-XXXX-XXXXXXXXXXXX/resourceGroups/test-azkeyvault-rg/providers/Microsoft.Resources/deployments/test-azkeyvault202010",
+  "name": "test-azkeyvault202010",
+  "type": "Microsoft.Resources/deployments",
+  "properties": {
+    "templateHash": "7218738253130361809",
+    "parameters": {
+      "vaultName": {
+        "type": "String",
+        "value": "keyvault-ajf56kpov44oi"
+      },
+      "location": {
+        "type": "String",
+        "value": "westeurope"
+      },
+      "enabledForDeployment": {
+        "type": "Bool",
+        "value": false
+      },
+      "enabledForDiskEncryption": {
+        "type": "Bool",
+        "value": false
+      },
+      "enabledForTemplateDeployment": {
+        "type": "String",
+        "value": "NotSpecified"
+      },
+      "publicNetworkAccess": {
+        "type": "String",
+        "value": ""
+      },
+      "enablePurgeProtection": {
+        "type": "Bool",
+        "value": false
+      },
+      "enableRbacAuthorization": {
+        "type": "Bool",
+        "value": false
+      },
+      "enableSoftDelete": {
+        "type": "Bool",
+        "value": true
+      },
+      "softDeleteRetentionInDays": {
+        "type": "Int",
+        "value": 90
+      },
+      "tenantId": {
+        "type": "String",
+        "value": "YYYYYYYY-YYYY-YYYY-YYYY-YYYYYYYYYYYY"
+      },
+      "networkRuleBypassOptions": {
+        "type": "String",
+        "value": "AzureServices"
+      },
+      "networkRuleAction": {
+        "type": "String",
+        "value": "Allow"
+      },
+      "ipRules": {
+        "type": "Array",
+        "value": []
+      },
+      "accessPolicies": {
+        "type": "Array",
+        "value": []
+      },
+      "virtualNetworkRules": {
+        "type": "Array",
+        "value": []
+      },
+      "skuName": {
+        "type": "String",
+        "value": "Standard"
+      },
+      "tags": {
+        "type": "Object",
+        "value": {}
+      }
+    },
+    "mode": "Incremental",
+    "provisioningState": "Accepted",
+    "timestamp": "2023-11-07T09:05:19.0626954Z",
+    "duration": "PT0.0000791S",
+    "correlationId": "13ca74bb-cc6a-4dd3-900a-f01f1d8ff16f",
+    "providers": [
+      {
+        "namespace": "Microsoft.KeyVault",
+        "resourceTypes": [
+          {
+            "resourceType": "vaults",
+            "locations": [
+              "westeurope"
+            ]
+          }
+        ]
+      }
+    ],
+    "dependencies": []
+  }
+}
